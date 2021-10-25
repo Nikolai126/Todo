@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div class="container">
+        <h1>ToDo</h1>
+        <div class="main">
+            <div class="header">
+                <label for="toggle-all" class="label-all"></label>
+                <input class="newTask" placeholder="What do u want to do?">
+            </div>
+            <ul class="list">
+                <li>
+                    <div class="view">
+                        <input class="toggle" type="checkbox">
+                        <label for="all">Завалить Рому вопросами</label>
+                    </div>
+                </li>
+                <li> 
+                    <div class="view">
+                        <input class="toggle" type="checkbox">
+                        <label for="all">Позвонить маме</label>
+                    </div>
+                </li>
+                <li>
+                    <div class="view">
+                        <input class="toggle" type="checkbox">
+                        <label for="all">Написать Todo</label>
+                    </div>
+                </li>
+                <li>
+                    <div class="view">
+                        <input class="toggle" type="checkbox">
+                        <label for="all">Ознакомиться с ТЗ по Трелло</label>
+                    </div>
+                </li>
+                <div class="footer">
+                    <span class="todo-count">
+                        0
+                        items left
+                    </span>
+                    <ul class="filters">
+                        <li class="filter"><a href="#" class="selected">All</a></li>
+                        <li class="filter"><a href="#">Active</a></li>
+                        <li class="filter"><a href="#">Completed</a></li>
+                    </ul>
+                    <button class="clear-completed">Clear completed</button>
+                </div>
+            </ul>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
