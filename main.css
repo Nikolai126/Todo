@@ -32,7 +32,7 @@ h1 {
     position: relative;
 }
 
-.label-all:before {
+.label-all:bgit efore {
     box-sizing: border-box;
     position: absolute;
     transform: rotate(90deg);
@@ -94,10 +94,30 @@ input::placeholder {
     border-bottom: 1px solid rgba(0, 0, 0, 0.11);
 }
 
+.delete {
+    position: absolute;
+    border: none;
+    background: none;
+    top: 0;
+    right: 10px;
+    bottom: 0;
+    width: 40px;
+    height: 40px;
+    margin: auto 0;
+    color: black;
+    font-size: 22px;
+    margin-bottom: 11px;
+    transition: color 0.2s ease-out;
+}
+
+.input {
+    
+}
+
+
 .list li label {
     padding-top: 18px;
     position: absolute;
-
 }
 
 .footer {
