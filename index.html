@@ -6,57 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="main.css">
+    <script src="https://kit.fontawesome.com/621115ef9d.js" crossorigin="anonymous" defer></script>
+    <script src="/scripts/views/app.js" type="module" defer></script>
 </head>
 <body>
     <div class="container">
         <h1>ToDo</h1>
         <div class="main">
             <div class="header">
-                <label for="toggle-all" class="label-all"></label>
-                <input class="newTask" placeholder="What do u want to do?">
+                <label class="toggle-all">❯</label>
+                <input id="inp" class="newTask" maxlength="33" placeholder="What do u want to do?">
             </div>
             <ul class="list">
-                <li>
-                    <div class="view">
-                        <input class="toggle" type="checkbox">
-                        <input class="input" type="text">
-                        <label for="all">Завалить Рому вопросами</label>
-                        <button class="delete">X</button>
-                    </div>
-                </li>
-                <li> 
-                    <div class="view">
-                        <input class="toggle" type="checkbox">
-                        <label for="all">Позвонить маме</label>
-                    </div>
-                </li>
-                <li>
-                    <div class="view">
-                        <input class="toggle" type="checkbox">
-                        <label for="all">Написать Todo</label>
-                    </div>
-                </li>
-                <li>
-                    <div class="view">
-                        <input class="toggle" type="checkbox">
-                        <label for="all">Ознакомиться с ТЗ по Трелло</label>
-                    </div>
-                </li>
-                <div class="footer">
-                    <span class="todo-count">
-                        0
-                        items left
-                    </span>
-                    <ul class="filters">
-                        <li class="filter"><a href="#" class="selected">All</a></li>
-                        <li class="filter"><a href="#">Active</a></li>
-                        <li class="filter"><a href="#">Completed</a></li>
-                    </ul>
-                    <button class="clear-completed">Clear completed</button>
+                <div class="Li">
+
                 </div>
+                
             </ul>
         </div>
     </div>
-    <script src="app.js"></script>
 </body>
 </html>

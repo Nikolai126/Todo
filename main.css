@@ -1,4 +1,4 @@
-* {
+ * {
     box-sizing: border-box;
 }
 
@@ -14,6 +14,10 @@ body {
     margin-right: auto;
 }
 
+.main {
+    box-shadow: 0 1px 7px rgba(0, 0, 0, 0.281)
+}
+
 h1 {
     width: 100%;
     text-align: center;
@@ -21,6 +25,199 @@ h1 {
     color: rgba(73, 8, 73, 0.26);
 }
 
+ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.header {
+    width: 100%;
+    height: 65px;
+    margin: 0;
+    background: rgba(255, 255, 255, 0.651);
+    display: flex;
+    box-shadow: inset 0 -2px 1px rgb(0 0 0 / 10%);
+}
+
+.toggle-all {
+    transform: rotate(90deg);
+    padding-top: 15px;
+    color: rgb(189, 189, 189);
+    text-align: center;
+    justify-content: center;
+    width: 65px;
+    font-size: 22px;
+    background: none;
+    display: block;
+}
+.toggle-all:active {
+    color: black;
+}
+
+.newTask {
+    width: 85%;
+    padding: 0;
+    display: block;
+    background: none;
+    border: none;
+    outline: none;
+    line-height: 1.4em;
+    color: #000000ad;
+    font-size: 20px;
+}
+input::placeholder {
+    color: lightgray;
+    font-style: italic;
+}
+
+.view {
+    width: 100%;
+    height: 58px;
+    margin: 0;
+    background: rgba(255, 255, 255, 0.651);
+    display: flex;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.11);
+}
+
+.description {
+    width: 85%;
+    margin-top: auto;
+    margin-bottom: auto;
+    display: flex;
+}
+
+.toggle {
+    min-width: 28px;
+    min-height: 28px;
+    margin: auto 10px auto 20px;
+}
+
+.label-text {
+    background: none;
+    font-size: 20px;
+    width: 100%;
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
+    line-height: 90%;
+}
+
+.task-text {
+    visibility: hidden;
+    background: none;
+    font-size: 20px;
+    width: 450px;
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.hidden-label {
+    background: none;
+    font-size: 20px;
+    width: 450px;
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
+    display: none;
+}
+
+.button-edit {
+    display: flex;
+    margin: auto auto;
+}
+
+.edit-btn {
+    background: none;
+    display: block;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    font-size: 22px;
+    color: rgb(55, 52, 87);
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.delete-btn {
+    background: none;
+    display: block;
+    margin-left: 8px;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding-top: 3px;
+    border: none;
+    cursor: pointer;
+    font-size: 28px;
+    color: rgb(55, 52, 87);
+}
+
+.footer {
+    background: rgba(255, 255, 255, 0.651);
+    display: flex;
+    width: 100%;
+    height: 40px;
+    vertical-align: middle;
+}
+
+.todo-count {
+    width: 28%;
+    height: 20px;
+    font-size: 16px;
+    color: rgba(65, 65, 65, 0.753);
+    margin: auto auto;
+    padding-left: 20px;
+}
+
+.filters {
+    display: inline;
+    width: 44%;
+    height: 20px;
+    margin: auto auto;
+    text-align: center;
+    list-style: none;
+    right: 0;
+    left: 0;
+    padding-inline-start: 0px;
+}
+
+.filter {
+    display: inline;
+    background: none;
+    border-bottom: none;
+    height: 20px;
+}
+
+.filter a {
+    text-decoration: none;
+    font-size: 16px;
+    color: rgba(65, 65, 65, 0.753);
+    background: none;
+    margin: auto auto;
+    padding: 3px 6px;
+    height: 20px;
+}
+
+.selected {
+    border: 1px solid rgba(73, 8, 73, 0.26);;
+    border-radius: 3px;
+}
+
+.clear-completed {
+    width: 28%;
+    font-size: 16px;
+    color: rgba(65, 65, 65, 0.753);
+    background: none;
+    cursor: pointer;
+    border: none;
+    height: 20px;
+    margin: auto auto;
+    padding: 0;
+}
+
+
+/*
 .main {
     box-shadow: 0 1px 7px rgba(0, 0, 0, 0.281)
 }
@@ -176,4 +373,4 @@ input::placeholder {
     border: none;
     height: 20px;
     margin: auto 10px auto 40px;
-}
+} */
