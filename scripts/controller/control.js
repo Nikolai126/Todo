@@ -30,10 +30,7 @@ App.prototype.addTask = function (inputVal) {
     const task = new Task(Date.now(), inputVal);
     this.taskList.push(task);
     let lengthTaskList = this.taskList.length;
-    this.view.render(this.taskList, task.id);
-    if (lengthTaskList > 0 && lengthTaskList < 2) {
-        this.view.createFooter(lengthTaskList);
-    };
+    this.view.render(this.taskList, ulElement);
 };
 
 App.prototype.deleting = function (id) {
@@ -41,10 +38,6 @@ App.prototype.deleting = function (id) {
         return task.id === id;
     });
     this.taskList.splice(task, 1);
-    let lengthTaskList = this.taskList.length;
-    if(lengthTaskList < 1) {
-        this.view.delFooter();
-    }
     this.view.render(this.taskList);
 };
 
@@ -54,10 +47,9 @@ App.prototype.editing = function (index) {
 };
 
 App.prototype.checking = function (index) {
-    this.taskList[index].comlited = !this.taskList.comlited;
-    if (this.taskList[index].comlited === true) {
-        console.log('true');
-    }
+    this.taskList[index].completed = !this.taskList[index].completed;
+    this.view.onChecking(index, this.taskList[index].completed, this.taskList);
+    console.log(this.taskList);
 };
 
 App.prototype.returnForLabel = function (valueInput, index) {

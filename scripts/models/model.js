@@ -1,8 +1,8 @@
 
-function Task(id, inputVal, complited) {
+function Task(id, inputVal, completed = false) {
     this.id = id;
     this.value = inputVal;
-    this.complited = false;
+    this.completed = completed;
 };
 
 

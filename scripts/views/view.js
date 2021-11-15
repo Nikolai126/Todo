@@ -6,11 +6,13 @@ function View(ulElement, divLi, actions) {
     this.deletingListener = actions.onDeleting;
     this.editingListener = actions.onEditing;
     this.returnForLable = actions.backForLabel;
-    this.checkTask = actions.onChecking
+    this.checkTask = actions.onChecking;
 }
 
 View.prototype.render = function (taskList = []) {
     this.clear();
+    
+    let lengthTaskList = taskList.length;
 
     const fragment = document.createDocumentFragment();
 
@@ -53,7 +55,6 @@ View.prototype.render = function (taskList = []) {
             };
         }.bind(this));
 
-
         let divButton = document.createElement('div');
         divButton.classList.add('button-edit');
 
@@ -73,7 +74,6 @@ View.prototype.render = function (taskList = []) {
             this.deletingListener(task.id);
         }.bind(this)); 
         
-
         buttonDelete.append(iconDelete);
         buttonEdit.append(iconEdit);
         divButton.append(buttonEdit, buttonDelete);
@@ -81,86 +81,105 @@ View.prototype.render = function (taskList = []) {
         divView.append(divDescription, divButton);
         li.append(divView);
         fragment.appendChild(li);
+        
     }.bind(this));
 
     this.divLi.appendChild(fragment);
-};
-
-View.prototype.createFooter = function (lengthTaskList) {
-    let divFooter = document.createElement('div');
-    divFooter.classList.add('footer');
-
-    let spanDescript = document.createElement('span');
-    spanDescript.classList.add('todo-count');
-    spanDescript.insertAdjacentText('afterbegin', 'items left');
-    let spanCount = document.createElement('span');
-    spanCount.classList.add('counter');
-    spanCount.insertAdjacentText('afterbegin', `${lengthTaskList}`);
-
-    let ulFilters = document.createElement('ul');
-    ulFilters.classList.add('filters');
-
-    let liSelected = document.createElement('li');
-    liSelected.classList.add('filter');
-    let aSelected = document.createElement('a');
-    aSelected.classList.add('selected');
-    aSelected.setAttribute('href', '#');
-    aSelected.insertAdjacentText('beforeend', 'All');
-    liSelected.append(aSelected);
-
-    let liActive = document.createElement('li');
-    liActive.classList.add('filter');
-    let aActive = document.createElement('a');
-    aActive.setAttribute('href', '#');
-    aActive.insertAdjacentText('beforeend', 'Active');
-    liActive.append(aActive);
-
-    let liCompleted = document.createElement('li');
-    liCompleted.classList.add('filter');
-    let aCompleted = document.createElement('a');
-    aCompleted.setAttribute('href', '#');
-    aCompleted.insertAdjacentText('beforeend', 'Completed');
-    liCompleted.append(aCompleted);
-
-    let buttonClrCompleted = document.createElement('button');
-    buttonClrCompleted.classList.add('clear-completed');
-    buttonClrCompleted.insertAdjacentText('beforeend', 'Clear completed');
-
-    spanDescript.append(spanCount);
-    ulFilters.append(liSelected);
-    ulFilters.append(liActive);
-    ulFilters.append(liCompleted);
-    divFooter.append(spanDescript);
-    divFooter.append(ulFilters);
-    divFooter.append(buttonClrCompleted);
 
 
-    this.element.append(divFooter);
-    return divFooter;
+    // Footer
+
+    let clearFooter = function () {
+        if (document.querySelector('.footer')) {
+            (document.querySelector('.list')).removeChild((document.querySelector('.footer')));
+        }
+    };
+
+    if (lengthTaskList > 0) {
+        
+        clearFooter();
+
+        let divFooter = document.createElement('div');
+        divFooter.classList.add('footer');
+
+        let spanDescript = document.createElement('span');
+        spanDescript.classList.add('todo-count');
+        spanDescript.insertAdjacentText('beforeend', 'items left');
+        let spanCount = document.createElement('span');
+        spanCount.classList.add('counter');
+        spanCount.insertAdjacentText('afterbegin', `${lengthTaskList}`);
+
+        let ulFilters = document.createElement('ul');
+        ulFilters.classList.add('filters');
+
+        let liSelected = document.createElement('li');
+        liSelected.classList.add('filter');
+        let aSelected = document.createElement('a');
+        aSelected.classList.add('selected');
+        aSelected.setAttribute('href', '#');
+        aSelected.insertAdjacentText('beforeend', 'All');
+        liSelected.append(aSelected);
+
+        let liActive = document.createElement('li');
+        liActive.classList.add('filter');
+        let aActive = document.createElement('a');
+        aActive.setAttribute('href', '#');
+        aActive.insertAdjacentText('beforeend', 'Active');
+        liActive.append(aActive);
+
+        let liCompleted = document.createElement('li');
+        liCompleted.classList.add('filter');
+        let aCompleted = document.createElement('a');
+        aCompleted.setAttribute('href', '#');
+        aCompleted.insertAdjacentText('beforeend', 'Completed');
+        liCompleted.append(aCompleted);
+
+        let buttonClrCompleted = document.createElement('button');
+        buttonClrCompleted.classList.add('clear-completed');
+        buttonClrCompleted.insertAdjacentText('beforeend', 'Clear completed');
+
+        ulFilters.append(liSelected);
+        ulFilters.append(liActive);
+        ulFilters.append(liCompleted);
+        divFooter.append(spanCount, spanDescript);
+        divFooter.append(ulFilters);
+        divFooter.append(buttonClrCompleted);
+
+
+        this.element.append(divFooter);
+    }
+    else if (lengthTaskList < 1) {
+        clearFooter();
+    }
+
 };
 
 View.prototype.onEditing = function (val, index) {
-    const strTask = String(index);
-    let label = document.querySelector(`[id=${CSS.escape(strTask)}]`);
+    let label = document.querySelector(`[id=${CSS.escape(index)}]`);
     label.classList.remove('label-text');
     label.classList.add('hidden-label');
     let labelValue = val;
-    let input = document.querySelector(`[id=${CSS.escape(strTask + 'i')}`);
+    let input = document.querySelector(`[id=${CSS.escape(index + 'i')}`);
     input.classList.remove('task-text');
     input.classList.add('label-text');
     input.value = labelValue;
     input.focus();
 };
 
-View.prototype.onChecking
+View.prototype.onChecking = function (index, completed) {
+    if (completed) {
+        console.log(1);
+        (document.querySelector(`[id=${CSS.escape(index)}]`)).setAttribute('style', 'text-decoration: line-through;');
+    }
+    else {
+        (document.querySelector(`[id=${CSS.escape(index)}]`)).removeAttribute('style');
+    }
+
+    return 'ok';
+};
 
 View.prototype.clear = function() {
     this.divLi.replaceChildren();
-};
-
-View.prototype.delFooter = function() {
-    const footer = document.querySelector('.footer');
-    this.element.removeChild(footer);
 };
 
 export default View;
