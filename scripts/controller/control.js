@@ -103,7 +103,7 @@ App.prototype.clearCompletedTasks = function () {
 
 
 App.prototype.LocalStorageCompletedList = function() { 
-    return (JSON.parse(localStorage.getItem('completedList')))
+    return (JSON.parse(localStorage.getItem('completedList'))) || []
 }
 
 App.prototype.LocalStorageActiveList = function() { 
@@ -170,7 +170,7 @@ App.prototype.LocalStorageSetRender = function() {
         document.querySelector('.footer').removeAttribute('style', 'display: flex;');
     }
 
-    this.view.render(listRender);
+    this.view.render(listRender, this.renderList);
 }
 
 App.prototype.clickFilters = function() {

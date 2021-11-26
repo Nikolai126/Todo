@@ -13,7 +13,7 @@ function View(ulElement, divLi, actions) {
     this.completedTaskList = actions.showCompletedTaskList;
 }
 
-View.prototype.render = function (taskList = []) {
+View.prototype.render = function (taskList = [], renderList) {
 
     this.divLi.replaceChildren();
     
@@ -119,7 +119,7 @@ View.prototype.render = function (taskList = []) {
 
     document.querySelector('.Li').appendChild(fragment);
     
-    if (completed > 0) {
+    if (completed > 0 && !(renderList === "Completed")) {
         document.querySelector('.counter').textContent  = lengthTaskList - completed;
     }
     else {

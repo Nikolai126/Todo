@@ -168,7 +168,7 @@ input::placeholder {
     font-size: 16px;
     color: rgba(65, 65, 65, 0.753);
     margin: auto 0;
-    padding-right: 34px;
+    width: 80px;
 }
 
 .counter {
