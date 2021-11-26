@@ -102,6 +102,7 @@ input::placeholder {
     margin-top: auto;
     margin-bottom: auto;
     line-height: 90%;
+    hyphens:auto;
 }
 
 .task-text {
@@ -156,7 +157,7 @@ input::placeholder {
 
 .footer {
     background: rgba(255, 255, 255, 0.651);
-    display: flex;
+    display: none;
     width: 100%;
     height: 40px;
     vertical-align: middle;
@@ -201,6 +202,7 @@ input::placeholder {
     margin: auto auto;
     padding: 3px 6px;
     height: 20px;
+    cursor: pointer;
 }
 
 .selected {
@@ -218,4 +220,61 @@ input::placeholder {
     height: 20px;
     margin: auto auto;
     padding: 0;
+}
+
+.popup {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    top: 0;
+    left: 0;
+    opacity: 1;
+    visibility: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 5;
+}
+
+.popup__body {
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 10px;
+}
+
+.popup__content {
+    border-radius: 20px;
+    background-color: rgb(196, 196, 196);
+    color: black;
+    max-width: 800px;
+    padding: 30px;
+    position: relative;
+}
+
+.popup__title {
+    font-size: 40px;
+    margin: 0 0 1em 0;
+}
+
+
+.popup__buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.popup__agr {
+    text-decoration: none;
+    color: black;
+    border-style: none;
+    padding: 10px 20px;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 20px;
+    background: white;
+    text-transform: uppercase;
+
 }

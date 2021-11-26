@@ -10,18 +10,41 @@
     <script src="/scripts/views/app.js" type="module" defer></script>
 </head>
 <body>
+    <div id="popup" class="popup">
+        <div class="popup__body">
+            <div class="popup__content">
+                <div class="popup__title">Are you sure?</div>
+                <div class="popup__buttons">
+                    <a id="buttonDelete" class="popup__agr">Delete</a>
+                    <a id="buttonCancel" class="popup__agr">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <h1>ToDo</h1>
         <div class="main">
             <div class="header">
-                <label class="toggle-all">❯</label>
+                <label id="completeAll" class="toggle-all">❯</label>
                 <input id="inp" class="newTask" maxlength="33" placeholder="What do u want to do?">
             </div>
             <ul class="list">
                 <div class="Li">
 
                 </div>
-                
+
+                <div class="footer">
+                    <span class="counter"></span>
+                    <span class="todo-count">items left</span>
+                    <ul class="filters">
+                        <li class="filter" id="liAll"><a id="aAll" class="aFilters">All</a></li>
+                        <li class="filter" id="liActive"><a id="aActive" class="aFilters">Active</a></li>
+                        <li class="filter" id="liCompleted"><a id="aCompleted" class="aFilters">Completed</a></li>
+                    </ul>
+                    <button class="clear-completed">Clear completed</button>
+                </div>
+
             </ul>
         </div>
     </div>
