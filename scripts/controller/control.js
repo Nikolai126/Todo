@@ -104,7 +104,7 @@ App.prototype.clearCompletedTasks = function () {
 
 
 App.prototype.LocalStorageCompletedList = function() { 
-    return (JSON.parse(localStorage.getItem('completedList')))
+    return (JSON.parse(localStorage.getItem('completedList'))) || []
 }
 
 App.prototype.LocalStorageActiveList = function() { 
