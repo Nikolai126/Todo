@@ -11,9 +11,10 @@ function View(ulElement, divLi, actions) {
     this.clearCompletedTasks = actions.onClrCompleted;
     this.activeTaskList = actions.onActive;
     this.completedTaskList = actions.showCompletedTaskList;
+    this.switchTodos = actions.switchTasks;
 }
 
-View.prototype.render = function (taskList = []) {
+View.prototype.render = function (taskList = [], renderList) {
 
     this.divLi.replaceChildren();
     
@@ -22,13 +23,18 @@ View.prototype.render = function (taskList = []) {
     const fragment = document.createDocumentFragment();
 
     let completed = 0;
+    
+    let listItems = [];
 
-    taskList.forEach(function (task) {
-
+    taskList.forEach(function (task, index) {
         let li = document.createElement('li');
 
         let divView = document.createElement('div');
         divView.classList.add('view');
+        divView.setAttribute('draggable', 'true');
+        divView.setAttribute('id', index);
+
+        li.setAttribute('index', index);
 
         let divDescription = document.createElement('div');
         divDescription.classList.add('description');
@@ -110,7 +116,7 @@ View.prototype.render = function (taskList = []) {
         divView.append(divDescription, divButton);
         li.append(divView);
         fragment.appendChild(li);
-
+        listItems.push(li);
         if (task.completed == true) {
             completed += 1;
         }
@@ -119,12 +125,13 @@ View.prototype.render = function (taskList = []) {
 
     document.querySelector('.Li').appendChild(fragment);
     
-    if (completed > 0) {
-        document.querySelector('.counter').textContent  = lengthTaskList - completed;
-    }
-    else {
+    if (renderList === 'Completed') {
         document.querySelector('.counter').textContent = lengthTaskList;
     }
+    else {
+        document.querySelector('.counter').textContent = lengthTaskList - completed;
+    }
+    
 
     let that = this;
     document.querySelector('.clear-completed').addEventListener('click', function () {
@@ -144,6 +151,7 @@ View.prototype.render = function (taskList = []) {
             this.checkAllTasks(completed);
         }
     }.bind(this)); 
+    this.addListeners(listItems);
 };
 
 View.prototype.createModal = function () {
@@ -175,5 +183,62 @@ View.prototype.onEditing = function (val, id) {
     input.focus();
 };
 
+
+View.prototype.addListeners = function(taskList) {
+    let dragStartIndex;
+    const todos = document.querySelectorAll('.view');
+    const todoListDragble = document.querySelectorAll('.Li li');
+    
+    let listItems = taskList;
+
+    function dragStart() {
+        dragStartIndex = +this.closest('li').getAttribute('index');
+    }
+
+    function dragEnter() {
+        this.classList.add('over');
+        this.firstChild.classList.add('over');
+    }
+    function dragLeave() {
+        this.classList.remove('over');
+        this.firstChild.classList.remove('over');
+    }
+    function dragOver(e) {
+        e.preventDefault();
+    }
+
+    let switchReference =  this.switchTodos;
+
+    function swapItems(fromIndex, toIndex) {
+        const divOne = listItems[fromIndex].querySelector('.view')
+        const divTwo = listItems[toIndex].querySelector('.view');
+        let idOne = +divOne.id;
+        let idTwo = +divTwo.id;
+
+        listItems[fromIndex].appendChild(divTwo);
+        listItems[toIndex].appendChild(divOne);
+
+        switchReference(idOne, idTwo, listItems);
+    }
+
+    function dragDrop() {
+        const dragEndIndex = +this.getAttribute('index');
+        swapItems(dragStartIndex, dragEndIndex);
+        this.classList.remove('over');
+        this.firstChild.classList.remove('over');
+    }
+
+    todos.forEach(function(task) {
+        task.addEventListener('dragstart', dragStart);
+    })
+
+    todoListDragble.forEach(function(item) {
+        item.addEventListener('dragover', dragOver);
+        item.addEventListener('drop', dragDrop);
+        item.addEventListener('dragenter', dragEnter);
+        item.addEventListener('dragleave', dragLeave)
+    }.bind(this))
+
+}
 
 export default View;

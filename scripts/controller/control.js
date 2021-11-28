@@ -21,6 +21,7 @@ function App() {
         onClrCompleted: (function () {this.clearCompletedTasks()}).bind(this),
         onActive: (function () {this.showActive()}).bind(this),
         showCompletedTaskList: (function () {this.completedTaskList()}).bind(this),
+        switchTasks: (function (idOne, idTwo, listItems) {this.switchTodos(idOne, idTwo, listItems)}).bind(this)
     })
 };
 
@@ -165,18 +166,17 @@ App.prototype.LocalStorageSetRender = function() {
     localStorage.setItem('renderList', JSON.stringify(this.renderList))
     localStorage.setItem('taskList', JSON.stringify(allTasks))
     localStorage.setItem('completedList', JSON.stringify(completedList))
-    
+
+    this.view.render(listRender, this.renderList);
+
     if (allTasks < 1) {
         document.querySelector('.footer').removeAttribute('style', 'display: flex;');
     }
-
-    this.view.render(listRender);
 }
 
 App.prototype.clickFilters = function() {
     const filtersButtons = document.querySelector('.filters');
     filtersButtons.addEventListener('click', function(e) {
-        console.log(filtersButtons);
         if(e.target.id === 'aActive') {
             this.renderList = "Active"
             console.log('Active:', this.renderList);
@@ -193,6 +193,25 @@ App.prototype.clickFilters = function() {
     }.bind(this))
 }
 
+App.prototype.switchTodos = function(fId, sId) {
+
+    let that = this;
+    function swap(input, index_A, index_B) {
+        let temp = input[index_A];
+
+        input[index_A] = input[index_B];
+        input[index_B] = temp;
+
+        return input;
+    }
+
+    this.taskList = swap(this.taskList, fId, sId)
+    this.completedList = swap(this.completedList, fId, sId)
+    this.activeList = swap(this.activeList, fId, sId)
+
+    this.LocalStorageSetRender();
+
+}
 
 
 export default App;
